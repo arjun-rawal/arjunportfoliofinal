@@ -25,11 +25,16 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <Image
-          src={ArjunNoBackground}
-          alt="Arjun Rawal"
-          className={styles.avatar}
-        />
+        <div className={styles.title}>
+          <h1 className={styles.name}>
+            Arjun Rawal
+          </h1>
+          <Image
+            src={ArjunNoBackground}
+            alt="Arjun Rawal"
+            className={styles.avatar}
+          />
+        </div>
         <Particles
           id="tsparticles"
           init={particlesInit}
