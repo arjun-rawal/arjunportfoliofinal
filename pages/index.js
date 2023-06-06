@@ -75,7 +75,7 @@ export default function Home() {
               links: {
                 color: "#ffffff",
                 distance: 200,
-                enable: true,
+                enable: false,
                 opacity: 0.5,
                 width: 1,
               },
@@ -95,15 +95,15 @@ export default function Home() {
               number: {
                 density: {
                   enable: true,
-                  area: 2000,
+                  area: 1000,
                 },
-                value: 100,
+                value: 200,
               },
               opacity: {
                 value: 0.8,
               },
               shape: {
-                type: "triangle",
+                type: "circle",
               },
               size: {
                 value: { min: 1, max: 6 },
