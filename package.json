@@ -17,6 +17,7 @@
     "react-particles": "^2.10.1",
     "react-tsparticles": "^2.10.1",
     "tsparticles": "^2.10.1",
-    "tsparticles-path-polygon": "^2.10.1"
+    "tsparticles-path-polygon": "^2.10.1",
+    "tsparticles-preset-sea-anemone": "^2.10.1"
   }
 }

@@ -5,13 +5,14 @@ import ArjunNoBackground from "../arjunTransparent.png";
 import ArjunStandingNoBackground from "arjunStandingTransparent.png";
 import { useCallback } from "react";
 import Particles from "react-tsparticles";
+import { loadSeaAnemonePreset } from "tsparticles-preset-sea-anemone";
 import { loadFull } from "tsparticles";
 
 export default function Home() {
   const particlesInit = useCallback(async (engine) => {
     console.log(engine);
 
-    await loadFull(engine);
+    await loadSeaAnemonePreset(engine);
   }, []);
   const particlesLoaded = useCallback(async (container) => {
     await console.log(container);
@@ -40,76 +41,8 @@ export default function Home() {
           init={particlesInit}
           loaded={particlesLoaded}
           options={{
-            background: {
-              color: {
-                value: "#000000",
-              },
-            },
-            fpsLimit: 120,
-            interactivity: {
-              events: {
-                onClick: {
-                  enable: true,
-                  mode: "push",
-                },
-                onHover: {
-                  enable: true,
-                  mode: "repulse",
-                },
-                resize: true,
-              },
-              modes: {
-                push: {
-                  quantity: 4,
-                },
-                repulse: {
-                  distance: 100,
-                  duration: 0.1,
-                },
-              },
-            },
-            particles: {
-              color: {
-                value: "#83ea9c",
-              },
-              links: {
-                color: "#ffffff",
-                distance: 200,
-                enable: false,
-                opacity: 0.5,
-                width: 1,
-              },
-              collisions: {
-                enable: true,
-              },
-              move: {
-                direction: "none",
-                enable: true,
-                outModes: {
-                  default: "bounce",
-                },
-                random: false,
-                speed:3,
-                straight: false,
-              },
-              number: {
-                density: {
-                  enable: true,
-                  area: 1000,
-                },
-                value: 200,
-              },
-              opacity: {
-                value: 0.8,
-              },
-              shape: {
-                type: "circle",
-              },
-              size: {
-                value: { min: 1, max: 6 },
-              },
-            },
-            detectRetina: true,
+            preset: "seaAnemone",
+
           }}
         />
       </main>
