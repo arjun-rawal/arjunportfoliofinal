@@ -3,10 +3,10 @@ import Image from "next/image";
 import styles from "@/styles/Home.module.css";
 import ArjunNoBackground from "../arjunTransparent.png";
 import ArjunStandingNoBackground from "arjunStandingTransparent.png";
-import { useCallback } from "react";
+import { useCallback, useRef, useState } from "react";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
-
+import ParticleOptionsModal from "../components/particleOptionsModal.js"
 export default function Home() {
   const particlesInit = useCallback(async (engine) => {
     console.log(engine);
@@ -16,6 +16,53 @@ export default function Home() {
   const particlesLoaded = useCallback(async (container) => {
     await console.log(container);
   }, []);
+
+  //particle options
+  const [modalOpen, setModalOpen] = useState(false);
+  const [particleSpeed, setParticleSpeed] = useState(3);
+
+  const [particleColors,setParticleColors] = useState(["#83ea9c","#FFFFFF","#a5fc03","#03e3fc","#fcad03","#fc035a"])
+  const handleParticleSpeedChange = (speed) => {
+    setParticleSpeed(speed);
+  };
+
+  const updateParticleColor = (index, color) => {
+    setParticleColors(prevColors => {
+      const updatedColors = [...prevColors]; 
+      updatedColors[index] = color; 
+      return updatedColors; 
+    });
+  };
+
+  const handleParticleColorChange1 = (color) => {
+    updateParticleColor(0,color);
+  };
+  const handleParticleColorChange2 = (color) => {
+    updateParticleColor(1,color);
+  };
+  const handleParticleColorChange3 = (color) => {
+    updateParticleColor(2,color);
+  };
+  const handleParticleColorChange4 = (color) => {
+    updateParticleColor(3,color);
+  };
+  const handleParticleColorChange5 = (color) => {
+    updateParticleColor(4,color);
+  };
+  const handleParticleColorChange6 = (color) => {
+    updateParticleColor(5,color);
+  };
+
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+ 
+
+
   return (
     <>
       <Head>
@@ -32,6 +79,21 @@ export default function Home() {
         <button className={styles.navbuttons}>Projects</button>
         <button className={styles.navbuttons}>Contact</button>
         </div>
+        <button onClick={()=>{setModalOpen(true)}} className={styles.particleOptionsButton}>
+          Particle Options
+        </button>
+        <ParticleOptionsModal
+        isOpen={modalOpen}
+        onClose={handleCloseModal}
+        onSpeedChange={handleParticleSpeedChange}
+        onColorChange1={handleParticleColorChange1}
+        onColorChange2={handleParticleColorChange2}
+        onColorChange3={handleParticleColorChange3}
+        onColorChange4={handleParticleColorChange4}
+        onColorChange5={handleParticleColorChange5}
+        onColorChange6={handleParticleColorChange6}
+
+      />
       </div>
 
       <main className={styles.main}>
@@ -80,7 +142,7 @@ export default function Home() {
             },
             particles: {
               color: {
-                value: ["#83ea9c","#FFFFFF","#a5fc03","#03e3fc","#fcad03","#fc035a"],
+                value: particleColors,
               },
               links: {
                 color: "#ffffff",
@@ -99,7 +161,7 @@ export default function Home() {
                   default: "bounce",
                 },
                 random: false,
-                speed:3,
+                speed: particleSpeed,
                 straight: false,
               },
               number: {
@@ -121,7 +183,7 @@ export default function Home() {
             },
             detectRetina: true,
           }}
-        />
+                  />
       </main>
     </>
   );
