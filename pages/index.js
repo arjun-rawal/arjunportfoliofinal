@@ -7,6 +7,7 @@ import { useCallback, useRef, useState } from "react";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 import ParticleOptionsModal from "../components/particleOptionsModal.js"
+import HomeScreen from "@/components/home";
 export default function Home() {
   const particlesInit = useCallback(async (engine) => {
     console.log(engine);
@@ -20,6 +21,7 @@ export default function Home() {
   //particle options
   const [modalOpen, setModalOpen] = useState(false);
   const [particleSpeed, setParticleSpeed] = useState(3);
+  const [speedUp, setSpeedUp] = useState(0);
 
   const [particleColors,setParticleColors] = useState(["#83ea9c","#FFFFFF","#a5fc03","#03e3fc","#fcad03","#fc035a"])
   const handleParticleSpeedChange = (speed) => {
@@ -63,6 +65,14 @@ export default function Home() {
  
 
 
+  const screenChange = (screen) =>{
+    setSpeedUp(-0.01);
+    setTimeout(function() {
+      setSpeedUp(0);
+    }, 5000)
+
+  }
+
   return (
     <>
       <Head>
@@ -71,10 +81,14 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/arjunTransparent.ico" />
       </Head>
+      <HomeScreen/>
+
+
+
       <div className={styles.header}>
         <div className={styles.navbar}>
         <button className={styles.navbuttons}>Home</button>
-        <button className={styles.navbuttons}>About Me</button>
+        <button onClick={()=>{screenChange("About")}} className={styles.navbuttons}>About Me</button>
         <button className={styles.navbuttons}>Skills</button>
         <button className={styles.navbuttons}>Projects</button>
         <button className={styles.navbuttons}>Contact</button>
@@ -95,18 +109,6 @@ export default function Home() {
 
       />
       </div>
-
-      <main className={styles.main}>
-        <div className={styles.title}>
-          <h1 className={styles.name}>
-            Arjun Rawal
-          </h1>
-          <Image
-            src={ArjunNoBackground}
-            alt="Arjun Rawal"
-            className={styles.avatar}
-          />
-        </div>
         <Particles
           id="tsparticles"
           init={particlesInit}
@@ -163,6 +165,7 @@ export default function Home() {
                 random: false,
                 speed: particleSpeed,
                 straight: false,
+                decay: speedUp,
               },
               number: {
                 density: {
@@ -184,7 +187,6 @@ export default function Home() {
             detectRetina: true,
           }}
                   />
-      </main>
     </>
   );
 }
